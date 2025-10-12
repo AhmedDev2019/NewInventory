@@ -1,0 +1,6 @@
+if( $request->avatar ){
+    Image::make($request->avatar)->resize(null, 400, function ($constraint) {
+        $constraint->aspectRatio();
+    })->save('uploads/admins/' . $request->avatar->hashName());
+    $admin->avatar = 'uploads/admins/' . $request->avatar->hashName();
+}
