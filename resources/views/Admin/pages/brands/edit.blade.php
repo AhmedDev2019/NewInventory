@@ -52,7 +52,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="exampleInputFile"><b>{{ trans('backend.image') }}</b></label>
+                            <label for="exampleInputFile"><b>{{ trans('backend.logo') }}</b></label>
                             <input type="file" name="logo" id="exampleInputFile" style="padding: 10px;height:45px" class="form-control image {{ $errors->has('logo') ? 'is-invalid' : '' }}">
                             @if ($errors->has('logo'))
                                 <span class="invalid-feedback" role="alert">

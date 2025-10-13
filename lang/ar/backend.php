@@ -306,4 +306,10 @@ return[
 
     'city' => 'المدينة',
     'responsible_person' => 'الشخص المسوْل',
+
+    'suppliers' => 'الموردين',
+
+    'supplier_type' => 'نوع المورد',
+    'person' => 'شخص',
+    'company' => 'شركة',
 ];

@@ -64,6 +64,11 @@ class WarehouseController extends Controller
         session()->flash('success', trans('backend.created_successfully'));
         return redirect()->route('admin.warehouses.index');
     }
+
+    public function show(Warehouse $warehouse)
+    {
+        return view('Admin.pages.warehouses.show' , compact('warehouse'));
+    }
     
     public function edit(Warehouse $warehouse)
     {

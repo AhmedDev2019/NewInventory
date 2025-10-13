@@ -1,7 +1,7 @@
 @extends('Admin.layouts.master')
 
 @section('pageTitle') 
-    <i class="fa fa-eye"></i> {{ trans('backend.show') }} {{ trans('backend.warehouses') }} 
+    <i class="fa fa-eye"></i> {{ trans('backend.show') }} {{ trans('backend.suppliers') }} 
 @endsection
 
 @section('content')
@@ -12,26 +12,25 @@
             <h3 class="box-title"> {{ trans('backend.infos') }}</h3>
 
             <!-- Start Button  -->
-
-            @if( $warehouse->status == 0 )
+            @if( $supplier->status == 0 )
                 <div class="button-page-header" style="margin-top:5px">
-                    <a class="btn btn-block btn-success" href="{{ route('admin.warehouses.activation' , $warehouse->id) }}">
+                    <a class="btn btn-block btn-success" href="{{ route('admin.suppliers.activation' , $supplier->id) }}">
                     <i class="fa fa-check fa-fw fa-lg"></i> {{ trans('backend.activation') }}</a>
                 </div>
             @else
                 <div class="button-page-header" style="margin-top:5px">
-                    <a class="btn btn-block btn-danger" href="{{ route('admin.warehouses.activation' , $warehouse->id) }}">
+                    <a class="btn btn-block btn-danger" href="{{ route('admin.suppliers.activation' , $supplier->id) }}">
                     <i class="fa fa-close fa-fw fa-lg"></i> {{ trans('backend.disable') }}</a>
                 </div>
             @endif
             
             <div class="button-page-header" style="margin-top:5px">
-                <a class="btn btn-block btn-info" href="{{ route('admin.warehouses.edit' , $warehouse->id) }}">
+                <a class="btn btn-block btn-info" href="{{ route('admin.suppliers.edit' , $supplier->id) }}">
                 <i class="fa fa-pencil fa-fw fa-lg"></i> {{ trans('backend.edit') }}</a>
             </div>
 
             <div class="button-page-header" style="margin-top:5px">
-                <a class="btn btn-block btn-warning" href="{{ route('admin.warehouses.index') }}">
+                <a class="btn btn-block btn-warning" href="{{ route('admin.suppliers.index') }}">
                 <i class="fa fa-reply fa-fw fa-lg"></i> {{ trans('backend.back') }}</a>
             </div>
             
@@ -44,71 +43,66 @@
 
 
                 <div class="row">
-                    <div class="col-md-1">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <!-- <label for="exampleInpu style="color:#337ab7"tFile"><b>{{ trans('backend.image') }}</b></label> -->
+                            <div class="imagePreview">
+                                <img style="width:100%;height:300px;margin-top:5px;object-fit:contain" class="image-preview img-thumbnail" src="{{ asset($supplier->logo) }}" alt="">
+                            </div>
+                            
+                        </div>
                     </div>
-                    <div class="col-md-11">
+                    <div class="col-md-8">
                         
                         <!-- Main Info  -->
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="name" style="color:#337ab7"><b>{{ trans('backend.name') }}</b></label>
+                                    <label for="name" style="color:#337ab7"><b>{{ trans('backend.supplier_type') }}</b></label>
                                     <h4 style="margin:0">
-                                        @if( app()->getLocale() == 'ar' )
-                                            {{  $warehouse->name_ar }}
-                                        @elseif( app()->getLocale() == 'en' )
-                                            {{  $warehouse->name_en }}
+                                        @if( $supplier->supplier_type == 'person' )
+                                            <p class="label label-warning">{{ trans('backend.person') }}</p>
+                                        @elseif( $supplier->supplier_type == 'company' )
+                                            <p class="label label-warning">{{ trans('backend.company') }}</p>
                                         @endif
                                     </h4>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="first_name" style="color:#337ab7"><b>{{ trans('backend.email') }}</b></label>
-                                    <h4 style="margin:0">{{ $warehouse->email }}</h4>
+                                    <label for="name" style="color:#337ab7"><b>{{ trans('backend.name') }}</b></label>
+                                    <h4 style="margin:0">{{ $supplier->name }}</h4>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="first_name" style="color:#337ab7"><b>{{ trans('backend.phone') }} 1</b></label>
-                                    <h4 style="margin:0">{{ $warehouse->phone }}</h4>
+                                    <label for="email" style="color:#337ab7"><b>{{ trans('backend.email') }}</b></label>
+                                    <h4 style="margin:0">{{ $supplier->email }}</h4>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="first_name" style="color:#337ab7"><b>{{ trans('backend.phone') }} 2</b></label>
-                                    <h4 style="margin:0">{{ $warehouse->phone2 ? $warehouse->phone2 : '---' }}</h4>
+                                    <label for="phone" style="color:#337ab7"><b>{{ trans('backend.phone') }}</b></label>
+                                    <h4 style="margin:0">{{ $supplier->phone }}</h4>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="phone2" style="color:#337ab7"><b>{{ trans('backend.phone') }} 2</b></label>
+                                    <h4 style="margin:0">{{ $supplier->phone2 ? $supplier->phone2 : '---' }}</h4>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="first_name" style="color:#337ab7"><b>{{ trans('backend.address') }}</b></label>
-                                <h4 style="margin:0">{{ $warehouse->address }}</h4>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="first_name" style="color:#337ab7"><b>{{ trans('backend.responsible_person') }}</b></label>
-                                <h4 style="margin:0">{{ $warehouse->responsible_person }}</h4>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="first_name" style="color:#337ab7"><b>{{ trans('backend.description') }}</b></label>
-                                <h4 style="margin:0">
-                                    @if( app()->getLocale() == 'ar' )
-                                        {!!  $warehouse->description_ar ? $warehouse->description_ar : '---' !!}
-                                    @elseif( app()->getLocale() == 'en' )
-                                        {!!  $warehouse->description_en ? $warehouse->description_en : '---' !!}
-                                    @endif
-                                </h4>
+                                <h4 style="margin:0">{{ $supplier->address ? $supplier->address : '---' }}</h4>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="first_name" style="color:#337ab7"><b>{{ trans('backend.status') }}</b></label>
                                     <h4 style="margin:0">
-                                        @if( $warehouse->status == 1 )
+                                        @if( $supplier->status == 1 )
                                             <span class="badge label-success">{{ trans('backend.active') }}</span>
                                         @else
                                             <span class="badge label-danger">{{ trans('backend.inactive') }}</span>
@@ -125,25 +119,25 @@
                             <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="first_name" style="color:#337ab7"><b>{{ trans('backend.login_count') }}</b></label>
-                                        <h4 style="margin:0">{{ $warehouse->login_count }}</h4>
+                                        <h4 style="margin:0">{{ $supplier->login_count }}</h4>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="first_name" style="color:#337ab7"><b>{{ trans('backend.logout_count') }}</b></label>
-                                        <h4 style="margin:0">{{ $warehouse->logout_count }}</h4>
+                                        <h4 style="margin:0">{{ $supplier->logout_count }}</h4>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="first_name" style="color:#337ab7"><b>{{ trans('backend.last_login') }}</b></label>
-                                        <h4 style="margin:0">{{ $warehouse->last_login_date }}</h4>
+                                        <h4 style="margin:0">{{ $supplier->last_login_date }}</h4>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="first_name" style="color:#337ab7"><b>{{ trans('backend.last_logout') }}</b></label>
-                                        <h4 style="margin:0">{{ $warehouse->last_logout_date }}</h4>
+                                        <h4 style="margin:0">{{ $supplier->last_logout_date }}</h4>
                                     </div>
                                 </div>
                             </div>
@@ -155,8 +149,8 @@
                                 <div class="form-group">
                                     <label for="first_name" style="color:#337ab7"><b>{{ trans('backend.created_at') }}</b></label>
                                     <h4 style="margin:0">
-                                        <p>{{ $warehouse->created_at->format('Y-m-d') }}</p>
-                                        <p>{{ $warehouse->created_at->format('h:i A') }}</p>
+                                        <p>{{ $supplier->created_at->format('Y-m-d') }}</p>
+                                        <p>{{ $supplier->created_at->format('h:i A') }}</p>
                                     </h4>
                                 </div>
                             </div>
@@ -164,8 +158,8 @@
                                 <div class="form-group">
                                     <label for="first_name" style="color:#337ab7"><b>{{ trans('backend.updated_at') }}</b></label>
                                     <h4 style="margin:0">
-                                        <p>{{ $warehouse->updated_at->format('Y-m-d') }}</p>
-                                        <p>{{ $warehouse->updated_at->format('h:i A') }}</p>
+                                        <p>{{ $supplier->updated_at->format('Y-m-d') }}</p>
+                                        <p>{{ $supplier->updated_at->format('h:i A') }}</p>
                                     </h4>
                                 </div>
                             </div>

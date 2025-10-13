@@ -302,5 +302,11 @@ return[
     'city' => 'City',
     'responsible_person' => 'Responsible Person',
 
+    'suppliers' => 'Suppliers',
+
+    'supplier_type' => 'Supplier Type',
+    'person' => 'Person',
+    'company' => 'Company',
+
     
 ];

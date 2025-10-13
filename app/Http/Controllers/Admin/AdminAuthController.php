@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Admin;
 use App\Models\Brand;
 use App\Models\Warehouse;
+use App\Models\Supplier;
 use App\Mail\AdminResetPassword;
 use DB;
 use Carbon\Carbon;
@@ -19,11 +20,13 @@ class AdminAuthController extends Controller
         $admins = Admin::count();
         $brands = Brand::count();
         $warehouses = Warehouse::count();
+        $suppliers = Supplier::count();
 
         return view('Admin.index' , compact(
             'admins',
             'brands',
             'warehouses',
+            'suppliers',
         ));
     }
 

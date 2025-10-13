@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\WarehouseController;
+use App\Http\Controllers\Admin\SupplierController;
 
 
 
@@ -97,6 +98,17 @@ function()
                 Route::get('/activation/{warehouse}' , [WarehouseController::class,'activation'])->name('admin.warehouses.activation');
             });
             
+            // Suppliers Routes ..
+            Route::group(['prefix' => 'suppliers'], function(){
+                Route::get('/' , [SupplierController::class,'index'])->name('admin.suppliers.index');
+                Route::get('/create' , [SupplierController::class,'create'])->name('admin.suppliers.create');
+                Route::post('/store' , [SupplierController::class,'store'])->name('admin.suppliers.store');
+                Route::get('/show/{supplier}' , [SupplierController::class,'show'])->name('admin.suppliers.show');
+                Route::get('/edit/{supplier}' , [SupplierController::class,'edit'])->name('admin.suppliers.edit');
+                Route::put('/update/{supplier}' , [SupplierController::class,'update'])->name('admin.suppliers.update');
+                Route::delete('/destroy/{supplier}' , [SupplierController::class,'destroy'])->name('admin.suppliers.destroy');
+                Route::get('/activation/{supplier}' , [SupplierController::class,'activation'])->name('admin.suppliers.activation');
+            });
     
     
     
