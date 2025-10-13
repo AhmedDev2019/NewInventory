@@ -301,4 +301,9 @@ return[
     'order' => 'الترتيب',
     'latest' => 'الاْحدث',
     'oldest' => 'الاْقدم',
+
+    'warehouses' => 'المخازن',
+
+    'city' => 'المدينة',
+    'responsible_person' => 'الشخص المسوْل',
 ];

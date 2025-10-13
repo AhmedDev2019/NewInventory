@@ -48,7 +48,7 @@
           
           <li class="dropdown messages-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-bell-o fa-fw fa-lg"></i>
+              <i class="fa fa-bell fa-fw fa-lg"></i>
               <span class="label label-danger">4</span>
             </a>
             <ul class="dropdown-menu">

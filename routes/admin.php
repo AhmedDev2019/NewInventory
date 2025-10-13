@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\AdminProfileController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\WarehouseController;
 
 
 
@@ -82,6 +83,18 @@ function()
                 Route::put('/update/{brand}' , [BrandController::class,'update'])->name('admin.brands.update');
                 Route::delete('/destroy/{brand}' , [BrandController::class,'destroy'])->name('admin.brands.destroy');
                 Route::get('/activation/{brand}' , [BrandController::class,'activation'])->name('admin.brands.activation');
+            });
+
+            // Warehouse Routes ..
+            Route::group(['prefix' => 'warehouses'], function(){
+                Route::get('/' , [WarehouseController::class,'index'])->name('admin.warehouses.index');
+                Route::get('/create' , [WarehouseController::class,'create'])->name('admin.warehouses.create');
+                Route::post('/store' , [WarehouseController::class,'store'])->name('admin.warehouses.store');
+                Route::get('/show/{warehouse}' , [WarehouseController::class,'show'])->name('admin.warehouses.show');
+                Route::get('/edit/{warehouse}' , [WarehouseController::class,'edit'])->name('admin.warehouses.edit');
+                Route::put('/update/{warehouse}' , [WarehouseController::class,'update'])->name('admin.warehouses.update');
+                Route::delete('/destroy/{warehouse}' , [WarehouseController::class,'destroy'])->name('admin.warehouses.destroy');
+                Route::get('/activation/{warehouse}' , [WarehouseController::class,'activation'])->name('admin.warehouses.activation');
             });
             
     

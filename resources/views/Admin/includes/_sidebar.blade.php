@@ -69,6 +69,30 @@
             </ul>
         </li>
 
+        <!-- Warehouses -->
+        <li class="{{ $segment == 'warehouses' ? 'active' : '' }} users-active-li roles-list-active-li role-active-li treeview">
+            <a href="users.html">
+                <i class="fa fa-warehouse"></i> <span>{{ trans('backend.warehouses') }}</span>
+                <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                <li class="{{ $route == 'admin.warehouses.index' ? 'active' : '' }}">
+                    <a href="{{ route('admin.warehouses.index') }}">
+                        <i class="fa fa-angle-double-{{ app()->getLocale() == 'ar' ? 'left' : 'right' }}"></i>
+                        <span>{{ trans('backend.warehouses') }}</span>
+                    </a>
+                </li>
+                <li class="{{ $route == 'admin.warehouses.create' ? 'active' : '' }}">
+                    <a href="{{ route('admin.warehouses.create') }}">
+                        <i class="fa fa-angle-double-{{ app()->getLocale() == 'ar' ? 'left' : 'right' }}"></i>
+                        <span>{{ trans('backend.create_new') }}</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
     
 
         <!-- Settings -->

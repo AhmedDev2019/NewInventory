@@ -297,5 +297,10 @@ return[
     'latest' => 'Latest',
     'oldest' => 'Oldest',
 
+    'warehouses' => 'Warehouses',
+
+    'city' => 'City',
+    'responsible_person' => 'Responsible Person',
+
     
 ];
