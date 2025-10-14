@@ -312,4 +312,8 @@ return[
     'supplier_type' => 'نوع المورد',
     'person' => 'شخص',
     'company' => 'شركة',
+
+    'customers' => 'العملاء',
+    'product_categories' => 'اْقسام المنتاجات',
+    'icon' => 'الاْيقونة',
 ];

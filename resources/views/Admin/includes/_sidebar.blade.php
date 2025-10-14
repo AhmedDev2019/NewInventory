@@ -116,6 +116,54 @@
                 </li>
             </ul>
         </li>
+        
+        <!-- Customers -->
+        <li class="{{ $segment == 'customers' ? 'active' : '' }} users-active-li roles-list-active-li role-active-li treeview">
+            <a href="users.html">
+                <i class="fa fa-users"></i> <span>{{ trans('backend.customers') }}</span>
+                <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                <li class="{{ $route == 'admin.customers.index' ? 'active' : '' }}">
+                    <a href="{{ route('admin.customers.index') }}">
+                        <i class="fa fa-angle-double-{{ app()->getLocale() == 'ar' ? 'left' : 'right' }}"></i>
+                        <span>{{ trans('backend.customers') }}</span>
+                    </a>
+                </li>
+                <li class="{{ $route == 'admin.customers.create' ? 'active' : '' }}">
+                    <a href="{{ route('admin.customers.create') }}">
+                        <i class="fa fa-angle-double-{{ app()->getLocale() == 'ar' ? 'left' : 'right' }}"></i>
+                        <span>{{ trans('backend.create_new') }}</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
+        <!-- Product Categories -->
+        <li class="{{ $segment == 'product_categories' ? 'active' : '' }} users-active-li roles-list-active-li role-active-li treeview">
+            <a href="users.html">
+                <i class="fa fa-bookmark"></i> <span>{{ trans('backend.product_categories') }}</span>
+                <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                <li class="{{ $route == 'admin.product_categories.index' ? 'active' : '' }}">
+                    <a href="{{ route('admin.product_categories.index') }}">
+                        <i class="fa fa-angle-double-{{ app()->getLocale() == 'ar' ? 'left' : 'right' }}"></i>
+                        <span>{{ trans('backend.product_categories') }}</span>
+                    </a>
+                </li>
+                <li class="{{ $route == 'admin.product_categories.create' ? 'active' : '' }}">
+                    <a href="{{ route('admin.product_categories.create') }}">
+                        <i class="fa fa-angle-double-{{ app()->getLocale() == 'ar' ? 'left' : 'right' }}"></i>
+                        <span>{{ trans('backend.create_new') }}</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
 
     
 

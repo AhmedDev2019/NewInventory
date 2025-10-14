@@ -9,6 +9,8 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\WarehouseController;
 use App\Http\Controllers\Admin\SupplierController;
+use App\Http\Controllers\Admin\CustomerController;
+use App\Http\Controllers\Admin\ProductCategoryController;
 
 
 
@@ -109,7 +111,29 @@ function()
                 Route::delete('/destroy/{supplier}' , [SupplierController::class,'destroy'])->name('admin.suppliers.destroy');
                 Route::get('/activation/{supplier}' , [SupplierController::class,'activation'])->name('admin.suppliers.activation');
             });
+
+            // Customers Routes ..
+            Route::group(['prefix' => 'customers'], function(){
+                Route::get('/' , [CustomerController::class,'index'])->name('admin.customers.index');
+                Route::get('/create' , [CustomerController::class,'create'])->name('admin.customers.create');
+                Route::post('/store' , [CustomerController::class,'store'])->name('admin.customers.store');
+                Route::get('/show/{customer}' , [CustomerController::class,'show'])->name('admin.customers.show');
+                Route::get('/edit/{customer}' , [CustomerController::class,'edit'])->name('admin.customers.edit');
+                Route::put('/update/{customer}' , [CustomerController::class,'update'])->name('admin.customers.update');
+                Route::delete('/destroy/{customer}' , [CustomerController::class,'destroy'])->name('admin.customers.destroy');
+                Route::get('/activation/{customer}' , [CustomerController::class,'activation'])->name('admin.customers.activation');
+            });
     
+            // Product Categories Routes ..
+            Route::group(['prefix' => 'product_categories'], function(){
+                Route::get('/' , [ProductCategoryController::class,'index'])->name('admin.product_categories.index');
+                Route::get('/create' , [ProductCategoryController::class,'create'])->name('admin.product_categories.create');
+                Route::post('/store' , [ProductCategoryController::class,'store'])->name('admin.product_categories.store');
+                Route::get('/edit/{productCategory}' , [ProductCategoryController::class,'edit'])->name('admin.product_categories.edit');
+                Route::put('/update/{productCategory}' , [ProductCategoryController::class,'update'])->name('admin.product_categories.update');
+                Route::delete('/destroy/{productCategory}' , [ProductCategoryController::class,'destroy'])->name('admin.product_categories.destroy');
+                Route::get('/activation/{productCategory}' , [ProductCategoryController::class,'activation'])->name('admin.product_categories.activation');
+            });
     
     
         });

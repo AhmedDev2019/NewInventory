@@ -308,5 +308,10 @@ return[
     'person' => 'Person',
     'company' => 'Company',
 
+    'customers' => 'Customers',
+
+    'product_categories' => 'Product Categories',
+    'icon' => 'Icon',
+
     
 ];

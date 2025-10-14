@@ -58,6 +58,32 @@
         </div>
       </div>
 
+      <div class="col-lg-3 col-xs-6">
+        <div class="small-box bg-blue">
+          <div class="inner text-uppercase">
+            <h3>{{ $customers }}</h3><p>{{ trans('backend.customers') }}</p>
+          </div>
+          <div class="icon">
+            <i class="fa fa-users"></i>
+          </div>
+            
+          <a href="{{ route('admin.customers.index') }}" class="small-box-footer text-uppercase"> {{ trans('backend.show_info') }} <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-xs-6">
+        <div class="small-box bg-blue">
+          <div class="inner text-uppercase">
+            <h3>{{ $product_categories }}</h3><p>{{ trans('backend.product_categories') }}</p>
+          </div>
+          <div class="icon">
+            <i class="fa fa-bookmark"></i>
+          </div>
+            
+          <a href="{{ route('admin.product_categories.index') }}" class="small-box-footer text-uppercase"> {{ trans('backend.show_info') }} <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+
     </div>
 
     
