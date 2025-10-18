@@ -79,11 +79,11 @@ class ProductCategoryController extends Controller
         ]);
         
         if( $request->icon ){
-            if( $product_category->icon != 'uploads/product_categories/default.png' && file_exists($product_category->icon) ){
-                unlink($product_category->icon);
+            if( $productCategory->icon != 'uploads/product_categories/default.png' && file_exists($productCategory->icon) ){
+                unlink($productCategory->icon);
             }
             Image::make($request->icon)->save('uploads/product_categories/' . $request->icon->hashName());
-            $product_category->icon = 'uploads/product_categories/' . $request->icon->hashName();
+            $productCategory->icon = 'uploads/product_categories/' . $request->icon->hashName();
         }
         $productCategory->name_ar = $request->name_ar;
         $productCategory->name_en = $request->name_en;

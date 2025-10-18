@@ -84,6 +84,19 @@
         </div>
       </div>
 
+      <div class="col-lg-3 col-xs-6">
+        <div class="small-box bg-blue">
+          <div class="inner text-uppercase">
+            <h3>{{ $products }}</h3><p>{{ trans('backend.products') }}</p>
+          </div>
+          <div class="icon">
+            <i class="fa fa-shopping-bag"></i>
+          </div>
+            
+          <a href="{{ route('admin.products.index') }}" class="small-box-footer text-uppercase"> {{ trans('backend.show_info') }} <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+
     </div>
 
     

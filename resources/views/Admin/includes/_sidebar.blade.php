@@ -165,6 +165,29 @@
             </ul>
         </li>
 
+        <!-- Products -->
+        <li class="{{ $segment == 'products' ? 'active' : '' }} users-active-li roles-list-active-li role-active-li treeview">
+            <a href="users.html">
+                <i class="fa fa-shopping-bag"></i> <span>{{ trans('backend.products') }}</span>
+                <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                <li class="{{ $route == 'admin.products.index' ? 'active' : '' }}">
+                    <a href="{{ route('admin.products.index') }}">
+                        <i class="fa fa-angle-double-{{ app()->getLocale() == 'ar' ? 'left' : 'right' }}"></i>
+                        <span>{{ trans('backend.products') }}</span>
+                    </a>
+                </li>
+                <li class="{{ $route == 'admin.products.create' ? 'active' : '' }}">
+                    <a href="{{ route('admin.products.create') }}">
+                        <i class="fa fa-angle-double-{{ app()->getLocale() == 'ar' ? 'left' : 'right' }}"></i>
+                        <span>{{ trans('backend.create_new') }}</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
     
 
         <!-- Settings -->

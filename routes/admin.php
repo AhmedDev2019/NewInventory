@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\WarehouseController;
 use App\Http\Controllers\Admin\SupplierController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\ProductCategoryController;
+use App\Http\Controllers\Admin\ProductController;
 
 
 
@@ -133,6 +134,18 @@ function()
                 Route::put('/update/{productCategory}' , [ProductCategoryController::class,'update'])->name('admin.product_categories.update');
                 Route::delete('/destroy/{productCategory}' , [ProductCategoryController::class,'destroy'])->name('admin.product_categories.destroy');
                 Route::get('/activation/{productCategory}' , [ProductCategoryController::class,'activation'])->name('admin.product_categories.activation');
+            });
+
+            // Products Routes ..
+            Route::group(['prefix' => 'products'], function(){
+                Route::get('/' , [ProductController::class,'index'])->name('admin.products.index');
+                Route::get('/create' , [ProductController::class,'create'])->name('admin.products.create');
+                Route::post('/store' , [ProductController::class,'store'])->name('admin.products.store');
+                Route::get('/show/{product}' , [ProductController::class,'show'])->name('admin.products.show');
+                Route::get('/edit/{product}' , [ProductController::class,'edit'])->name('admin.products.edit');
+                Route::put('/update/{product}' , [ProductController::class,'update'])->name('admin.products.update');
+                Route::delete('/destroy/{product}' , [ProductController::class,'destroy'])->name('admin.products.destroy');
+                Route::get('/activation/{product}' , [ProductController::class,'activation'])->name('admin.products.activation');
             });
     
     

@@ -184,6 +184,7 @@ return [
         'image'                  => 'الصورة',
         'responsible_person'     => 'الشخص المسوْل',
         'phone2'     => 'الهاتف 2',
+        'stock_alert'     => 'تنبيه المخزن',
 
         'en' => [
             'name' => 'الإسم بالإنجليزي',

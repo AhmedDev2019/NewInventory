@@ -312,6 +312,18 @@ return[
 
     'product_categories' => 'Product Categories',
     'icon' => 'Icon',
+    'code' => 'Code',
+
+    'supplier' => 'Supplier',
+    'warehouse' => 'Warehouse',
+    'stock_alert' => 'Stock Alert',
+    'quantity' => 'Quantity',
+    'image_gallery' => 'Image Gallery',
+    'product_category' => 'Product Category',
+    'brand' => 'Brand',
+    'discount' => 'Discount',
+    'pending' => 'Pending',
+    'received' => 'Received',
 
     
 ];

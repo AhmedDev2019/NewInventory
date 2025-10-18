@@ -316,4 +316,18 @@ return[
     'customers' => 'العملاء',
     'product_categories' => 'اْقسام المنتاجات',
     'icon' => 'الاْيقونة',
+    'code' => 'الكود',
+
+    'supplier' => 'المورد',
+    'warehouse' => 'المخزن',
+    'stock_alert' => 'تنبيه المخزن',
+    'quantity' => 'الكمية',
+    'image_gallery' => 'معرض الصور',
+    'product_category' => 'قسم المنتج',
+
+    'brand' => 'الماركة',
+    'discount' => 'التخفيض',
+
+    'pending' => 'فى الإنتظار',
+    'received' => 'تم الإستلام',
 ];
