@@ -266,6 +266,129 @@
 
     </div>
 
+    <br><br>
+
+    <div class="box">
+
+        <div class="box-header with-border">
+            <h3 class="">{{ trans('backend.image_gallery') }}</h3> &nbsp;&nbsp;&nbsp;&nbsp;
+            <!-- Start Button  -->
+            <div class="" style="margin-top:5px">
+                <a class="btn btn-block bg-olive add-single-image" href="javascript:void">
+                <i class="fa fa-plus-circle fa-lg fa-fw"></i> {{ trans('backend.add_images_to_gallery') }}</a>
+            </div>
+        </div>
+
+        <div class="box-body">
+
+            <!-- Start Row  -->
+            <div class="">
+                @php
+                    $product_images = App\Models\ProductImage::where('product_id',$product->id)->get();
+                @endphp
+                
+                <hr>
+                    <!-- <a href="" class="btn btn-primary add-single-image"><i class="fa fa-plus-circle fa-lg fa-fw"></i> {{ trans('backend.add_images_to_gallery') }}</a> -->
+                
+                <div class="row">
+                    @foreach($product_images as $img)
+                        <div class="col-md-4 col-{{ $img->id }}" style="margin:20px 0">
+                            <img style="width:100%;height:250px;object-fit:contain" class="img-thumbnail" src="{{ asset($img->image) }}" alt="">
+                            <div class="buttons text-center" style="display:flex;justify-content:center;margin:5px">
+                                <button class="btn btn-info edit-single-image" data-id="{{ $img->id }}"><i class="fa fa-pencil"></i> {{ trans('backend.edit') }}</button>
+                                &nbsp;&nbsp;
+                                <button class="btn btn-danger delete-single-image" data-id="{{ $img->id }}"><i class="fa fa-trash"></i> {{ trans('backend.delete') }}</button>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+                    
+        </div>    
+
+    </div>
+
+
+    <!-- Edit Image Modal  -->
+    <div class="modal fade edit-single-image-modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">{{ trans('backend.edit_image') }}</h4>
+                </div>
+                <div class="modal-body">
+                <form id="editImageForm" action="{{ route('admin.products.update-single-image') }}" method="POST" enctype="multipart/form-data">
+                    {{ csrf_field() }}
+                    {{ method_field('POST') }}
+
+                    <input type="hidden" name="imageId" class="imageId" id="imageId">
+                    
+                        
+                            <div class="form-group">
+                                <label for="exampleInputFile"><b>{{ trans('backend.image') }}</b></label>
+                                <div class="imagePreview">
+                                    <img style="width:100%;margin-top:5px" class="image-preview2 img-thumbnail" src="{{ asset('uploads/products/default.png') }}" alt="">
+                                </div>
+                                <br>
+                                <input type="file" name="image" id="exampleInputFile" style="padding: 10px;height:45px" class="form-control image2 {{ $errors->has('image') ? 'is-invalid' : '' }}">
+                                @if ($errors->has('image'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('image') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">{{ trans('backend.close') }}</button>
+                        <button type="submit" class="btn btn-success">{{ trans('backend.update') }}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Single Image Modal  -->
+    <div class="modal fade add-single-image-modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">{{ trans('backend.add_image') }}</h4>
+                </div>
+                <div class="modal-body">
+                <form id="addImageForm" action="{{ route('admin.products.store-single-image') }}" method="POST" enctype="multipart/form-data">
+                    {{ csrf_field() }}
+                    {{ method_field('POST') }}
+
+                            <input type="hidden" name="product_id" class="product_id" id="product_id" value="{{ $product->id }}">
+                    
+                        
+                            <div class="form-group">
+                                <label for="exampleInputFile"><b>{{ trans('backend.image') }}</b></label>
+                                <div class="imagePreview">
+                                    <img style="width:100%;margin-top:5px" class="image-preview2 img-thumbnail" src="{{ asset('uploads/products/default.png') }}" alt="">
+                                </div>
+                                <br>
+                                <input type="file" name="image" id="exampleInputFile" style="padding: 10px;height:45px" class="form-control image2 {{ $errors->has('image') ? 'is-invalid' : '' }}">
+                                @if ($errors->has('image'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('image') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">{{ trans('backend.close') }}</button>
+                        <button type="submit" class="btn btn-primary">{{ trans('backend.add') }}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
 @endsection
 
 
@@ -358,6 +481,95 @@ $(document).ready(function(){
         $("#multiple_images")[0].files = dt.files;
 
         $selectedPip.remove();
+    });
+
+    // Delete Single Image .
+    $(document).on('click' , '.delete-single-image' , function(e){
+        e.preventDefault();
+
+        var image_id = $(this).data('id');
+
+        if( confirm("{{ trans('backend.confirm_delete') }}") ){
+            $.ajax({
+                url : "{{ route('admin.products.delete-single-image') }}",
+                type : 'GET',
+                data : { image_id : image_id },
+                success : function(data){
+                    $('.col-'+image_id).remove();
+                }
+            })
+        }
+
+    });
+
+    // Edit Single Image .
+    $(document).on('click' , '.edit-single-image' , function(e){
+        e.preventDefault();
+
+        var image_id = $(this).data('id');
+
+        $('.edit-single-image-modal').modal('show');
+        $('.imageId').val(image_id);
+
+        if( image_id ){
+            $.ajax({
+            url : "{{ route('admin.products.edit-single-image') }}",
+            type : 'GET',
+            data : { image_id : image_id },
+                success : function(data){
+                    $('.image-preview2').attr('src' , data);
+                }
+            })
+        }
+
+    });
+
+    // Update Single Image .
+    $(document).on('submit' , '#editImageForm' , function(e){
+        e.preventDefault();
+
+            var url = $(this).attr('action');
+            var image_id = $('#imageId').val();
+
+            $.ajax({
+                url : url,
+                type : 'POST',
+                contentType: false,
+                processData: false,
+                data : new FormData(this),
+                success : function(data){
+                    location.reload();
+                }
+            })
+
+    });
+
+    // Add Single Image .
+    $(document).on('click' , '.add-single-image' , function(e){
+        e.preventDefault();
+
+        $('.add-single-image-modal').modal('show');
+
+    });
+
+    // Update Single Image .
+    $(document).on('submit' , '#addImageForm' , function(e){
+        e.preventDefault();
+
+            var url = $(this).attr('action');
+
+            $.ajax({
+                url : url,
+                type : 'POST',
+                contentType: false,
+                processData: false,
+                data : new FormData(this),
+                success : function(data){
+                    console.log(data);
+                    location.reload();
+                }
+            })
+
     });
 
 });

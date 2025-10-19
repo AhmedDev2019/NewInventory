@@ -146,6 +146,14 @@ function()
                 Route::put('/update/{product}' , [ProductController::class,'update'])->name('admin.products.update');
                 Route::delete('/destroy/{product}' , [ProductController::class,'destroy'])->name('admin.products.destroy');
                 Route::get('/activation/{product}' , [ProductController::class,'activation'])->name('admin.products.activation');
+
+                // get sub categories by ajax .
+                Route::get('/delete-single-image' , [ProductController::class,'deleteSingleImage'])->name('admin.products.delete-single-image');
+                Route::get('/edit-single-image' , [ProductController::class,'editSingleImage'])->name('admin.products.edit-single-image');
+                Route::get('/add-single-image' , [ProductController::class,'addSingleImage'])->name('admin.products.add-single-image');
+                Route::post('/store-single-image' , [ProductController::class,'storeSingleImage'])->name('admin.products.store-single-image');
+                Route::post('/update-single-image' , [ProductController::class,'updateSingleImage'])->name('admin.products.update-single-image');
+                
             });
     
     

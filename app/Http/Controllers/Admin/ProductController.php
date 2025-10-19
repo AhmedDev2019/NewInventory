@@ -17,6 +17,10 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $products = Product::query();
+        $brands = Brand::all();
+        $product_categories = ProductCategory::all();
+        $suppliers = Supplier::all();
+        $warehouses = Warehouse::all();
 
         if( $request->order ){
             $products = $products->orderBy('id' , $request->order);
@@ -27,9 +31,35 @@ class ProductController extends Controller
                              ->orWhere('name_en' , 'LIKE' , '%'.$request->search.'%');
         }
 
-        $products = $products->paginate(15);
+        if( $request->product_category_id ){
+            $products = $products->where('product_category_id' , $request->product_category_id);
+        }
 
-        return view('Admin.pages.products.index' , compact('products'));
+        if( $request->brand_id ){
+            $products = $products->where('brand_id' , $request->brand_id);
+        }
+
+        if( $request->warehouse_id ){
+            $products = $products->where('warehouse_id' , $request->warehouse_id);
+        }
+
+        if( $request->supplier_id ){
+            $products = $products->where('supplier_id' , $request->supplier_id);
+        }
+
+        if( $request->status ){
+            $products = $products->where('status' , $request->status);
+        }
+
+        $products = $products->paginate(10);
+
+        return view('Admin.pages.products.index' , compact(
+            'products',
+            'brands',
+            'product_categories',
+            'suppliers',
+            'warehouses',
+        ));
     }
 
     public function create()
@@ -50,8 +80,8 @@ class ProductController extends Controller
     public function store(Request $request)
     {        
         $request->validate([
-            'name_ar' => 'nullable|min:3|unique:products',
-            'name_en' => 'nullable|min:3|unique:products',
+            'name_ar' => 'nullable|min:3',
+            'name_en' => 'nullable|min:3',
             'brand_id' => 'required',
             'product_category_id' => 'required',
             'supplier_id' => 'required',
@@ -133,25 +163,61 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         $request->validate([
-            'name_ar' => 'required|min:3|unique:products,name_ar,' . $productCategory->id,
-            'name_en' => 'nullable|min:3|unique:products,name_en,' . $productCategory->id,
+            'name_ar' => 'nullable|min:3',
+            'name_en' => 'nullable|min:3',
+            'brand_id' => 'required',
+            'product_category_id' => 'required',
+            'supplier_id' => 'required',
+            'warehouse_id' => 'required',
+            'code' => 'required|min:6|max:12',
+            'price' => 'required|numeric',
+            'discount' => 'nullable|numeric',
+            'stock_alert' => 'required|numeric|min:1|max:1000',
+            'quantity' => 'required|numeric|min:1|max:1000000',
             'description_ar' => 'nullable',
             'description_en' => 'nullable',
-            'icon' => 'nullable|image|mimes:png,jpg,jpeg,gif,webp,svg'
+            'image' => 'nullable|image|mimes:png,jpg,jpeg,gif,webp,svg',
         ]);
         
-        if( $request->icon ){
-            if( $product_category->icon != 'uploads/products/default.png' && file_exists($product_category->icon) ){
-                unlink($product_category->icon);
+        if( $request->image ){
+            if( $product->image != 'uploads/products/default.png' && file_exists($product->image)){
+                unlink($product->image);
             }
-            Image::make($request->icon)->save('uploads/products/' . $request->icon->hashName());
-            $product_category->icon = 'uploads/products/' . $request->icon->hashName();
+            Image::make($request->image)->save('uploads/products/' . $request->image->hashName());
+            $product->image = 'uploads/products/' . $request->image->hashName();
         }
-        $productCategory->name_ar = $request->name_ar;
-        $productCategory->name_en = $request->name_en;
-        $productCategory->description_ar = $request->description_ar;
-        $productCategory->description_en = $request->description_en;
-        $productCategory->save();
+        $product->name_ar = $request->name_ar;
+        $product->name_en = $request->name_en;
+        $product->brand_id = $request->brand_id;
+        $product->product_category_id = $request->product_category_id;
+        $product->supplier_id = $request->supplier_id;
+        $product->warehouse_id = $request->warehouse_id;
+        $product->code = $request->code;
+        $product->price = $request->price;
+        $product->discount = $request->discount;
+        $product->quantity = $request->quantity;
+        $product->stock_alert = $request->stock_alert;
+        $product->status = $request->status;
+        $product->description_ar = $request->description_ar;
+        $product->description_en = $request->description_en;
+        $product->save();
+
+        // Image Gallery [ Multiple Images ].
+        if( $request->multiple_images ){
+
+            // Loop through images from request .
+            foreach( $request->multiple_images as $img ){
+                // Save Image In Server[App].
+                Image::make($img)->save('uploads/products/multi_images/' . $img->hashName());
+                $product->image = 'uploads/products/multi_images/' . $img->hashName();
+
+                // Save Image In Database .
+                ProductImage::create([
+                    'product_id' => $product->id,
+                    'image' => 'uploads/products/multi_images/' . $img->hashName()
+                ]);
+            }
+        }
 
         session()->flash('success', trans('backend.updated_successfully'));
         return redirect()->route('admin.products.index');
@@ -184,5 +250,54 @@ class ProductController extends Controller
             return redirect()->back();
         }
         
+    }
+
+    public function deleteSingleImage(Request $request)
+    {
+        $product_image = ProductImage::find($request->image_id);
+        unlink($product_image->image);
+        $product_image->delete();
+        return $product_image;
+    }
+
+    public function editSingleImage(Request $request)
+    {
+        $product_image = ProductImage::find($request->image_id);
+
+        return asset($product_image->image);
+    }
+
+    public function updateSingleImage(Request $request)
+    {
+
+        $product_single_image = ProductImage::find($request->imageId);
+
+        if( $request->image ){
+            
+            unlink($product_single_image->image);
+            $product_single_image->delete();
+
+            Image::make($request->image)->save('uploads/products/multi_images/' . $request->image->hashName());
+            $product_single_image->image = 'uploads/products/multi_images/' . $request->image->hashName();
+            $product_single_image->save();
+        }
+
+        
+    }
+
+    public function storeSingleImage(Request $request)
+    {
+        if( $request->image ){
+            $product_single_image = new ProductImage;
+
+            // Insert Image into server .
+            Image::make($request->image)->save('uploads/products/multi_images/' . $request->image->hashName());
+            $product_single_image->image = 'uploads/products/multi_images/' . $request->image->hashName();
+            
+            // insert image into database .
+            $product_single_image->product_id = $request->product_id;
+            $product_single_image->image = 'uploads/products/multi_images/' . $request->image->hashName();
+            $product_single_image->save();
+        }
     }
 }

@@ -325,5 +325,10 @@ return[
     'pending' => 'Pending',
     'received' => 'Received',
 
+    'add_images_to_gallery' => 'Add Images To Gallery',
+    'add_image' => 'Add Image',
+    'edit_image' => 'Edit Image',
+    'no_data' => 'No Data Found !',
+
     
 ];
