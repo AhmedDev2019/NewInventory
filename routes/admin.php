@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\SupplierController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\ProductCategoryController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\PurchaseController;
 
 
 
@@ -153,7 +154,21 @@ function()
                 Route::get('/add-single-image' , [ProductController::class,'addSingleImage'])->name('admin.products.add-single-image');
                 Route::post('/store-single-image' , [ProductController::class,'storeSingleImage'])->name('admin.products.store-single-image');
                 Route::post('/update-single-image' , [ProductController::class,'updateSingleImage'])->name('admin.products.update-single-image');
-                
+
+            });
+
+            // Products Routes ..
+            Route::group(['prefix' => 'purchases'], function(){
+                Route::get('/' , [PurchaseController::class,'index'])->name('admin.purchases.index');
+                Route::get('/create' , [PurchaseController::class,'create'])->name('admin.purchases.create');
+                Route::post('/store' , [PurchaseController::class,'store'])->name('admin.purchases.store');
+
+                Route::get('/search-products' , [PurchaseController::class,'searchProducts'])->name('admin.purchases.search-products');
+                // Route::get('/show/{purchase}' , [PurchaseController::class,'show'])->name('admin.purchases.show');
+                // Route::get('/edit/{purchase}' , [PurchaseController::class,'edit'])->name('admin.purchases.edit');
+                // Route::put('/update/{purchase}' , [PurchaseController::class,'update'])->name('admin.purchases.update');
+                // Route::delete('/destroy/{purchase}' , [PurchaseController::class,'destroy'])->name('admin.purchases.destroy');
+                // Route::get('/activation/{purchase}' , [PurchaseController::class,'activation'])->name('admin.purchases.activation');
             });
     
     

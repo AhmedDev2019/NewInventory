@@ -97,6 +97,19 @@
         </div>
       </div>
 
+      <div class="col-lg-3 col-xs-6">
+        <div class="small-box bg-blue">
+          <div class="inner text-uppercase">
+            <h3>{{ $purchases }}</h3><p>{{ trans('backend.purchases') }}</p>
+          </div>
+          <div class="icon">
+            <i class="fa fa-shopping-cart"></i>
+          </div>
+            
+          <a href="{{ route('admin.purchases.index') }}" class="small-box-footer text-uppercase"> {{ trans('backend.show_info') }} <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+
     </div>
 
     

@@ -329,6 +329,20 @@ return[
     'add_image' => 'Add Image',
     'edit_image' => 'Edit Image',
     'no_data' => 'No Data Found !',
+    'purchases' => 'Purchases',
+    'shipping' => 'Shipping',
+    'grand_total' => 'Grand Total',
+    'product' => 'Product',
+    'products_table' => 'Products Table',
+    'net_unit_price' => 'Net Unit Price',
+    'stock' => 'Stock',
+    'sub_total' => 'Sub Total',
+    'ordered' => 'Ordered',
+
+    'barcode' => 'Barcode',
+    'qrcode' => 'Qrcode',
+    'select_warehouse' => 'Select Warehouse !',
+    'select_product' => 'Select Product !',
 
     
 ];

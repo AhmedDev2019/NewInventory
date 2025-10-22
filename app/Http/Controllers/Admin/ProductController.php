@@ -11,6 +11,9 @@ use App\Models\Warehouse;
 use App\Models\ProductImage;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
+use Storage;
+use \Milon\Barcode\DNS1D;
+use \Milon\Barcode\DNS2D;
 
 class ProductController extends Controller
 {
@@ -101,13 +104,13 @@ class ProductController extends Controller
             Image::make($request->image)->save('uploads/products/' . $request->image->hashName());
             $product->image = 'uploads/products/' . $request->image->hashName();
         }
+        $product->code = $request->code;
         $product->name_ar = $request->name_ar;
         $product->name_en = $request->name_en;
         $product->brand_id = $request->brand_id;
         $product->product_category_id = $request->product_category_id;
         $product->supplier_id = $request->supplier_id;
         $product->warehouse_id = $request->warehouse_id;
-        $product->code = $request->code;
         $product->price = $request->price;
         $product->discount = $request->discount;
         $product->quantity = $request->quantity;
@@ -116,7 +119,7 @@ class ProductController extends Controller
         $product->description_ar = $request->description_ar;
         $product->description_en = $request->description_en;
         $product->save();
-
+        
         // Image Gallery [ Multiple Images ].
         if( $request->multiple_images ){
 
@@ -226,11 +229,11 @@ class ProductController extends Controller
     
     public function destroy(Product $product)
     {
-        if( $productCategory->icon != 'uploads/products/default.png' && file_exists($productCategory->icon) ){
-            unlink($productCategory->icon);
+        if( $product->icon != 'uploads/products/default.png' && file_exists($product->icon) ){
+            unlink($product->icon);
         }
 
-        $productCategory->delete();
+        $product->delete();
 
         session()->flash('success', trans('backend.deleted_successfully'));
         return redirect()->back();

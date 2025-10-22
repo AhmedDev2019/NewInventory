@@ -20,7 +20,7 @@ $(document).ready(function(){
     });
 
     // Image Preview 2
-    function readURL(input) {
+    function readURL2(input) {
       if (input.files && input.files[0]) {
         var reader = new FileReader();
         
@@ -33,7 +33,7 @@ $(document).ready(function(){
     }
       
     $(".image2").change(function() {
-      readURL(this);
+      readURL2(this);
     });
 
 

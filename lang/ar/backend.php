@@ -337,4 +337,21 @@ return[
     'edit_image' => 'تعديل الصورة',
 
     'no_data' => 'لا يوجد بيانات !',
+
+    'purchases' => 'المشتريات',
+
+    'shipping' => 'الشحن',
+    'grand_total' => 'المجموع الكلي',
+    'product' => 'المنتج',
+    'products_table' => 'جدول المنتاجات',
+    'net_unit_price' => 'صافي سعر الوحدة',
+    'stock' => 'المخزن',
+    'sub_total' => 'المجموع الفرعي',
+    'ordered' => 'تم الطلب',
+
+    'barcode' => 'باركود',
+    'qrcode' => 'كيو اْر كود',
+    'select_warehouse' => 'إختار المخزن',
+    'select_product' => 'إختار المنتج !',
+
 ];

@@ -145,7 +145,7 @@
                                     </h4>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6" style="margin-bottom:15px">
                                 <div class="form-group">
                                     <label for="first_name" style="color:#337ab7"><b>{{ trans('backend.status') }}</b></label>
                                     <h4 style="margin:0">
@@ -157,7 +157,7 @@
                                     </h4>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6" style="margin-bottom:15px">
                                 <div class="form-group">
                                     <label for="first_name" style="color:#337ab7"><b>{{ trans('backend.status') }}</b></label>
                                     <h4 style="margin:0">
@@ -169,6 +169,22 @@
                                     </h4>
                                 </div>
                             </div>
+                            <div class="col-md-6" style="margin-bottom:15px">
+                                <div class="form-group">
+                                    <label for="first_name" style="color:#337ab7"><b>{{ trans('backend.barcode') }}</b></label>
+                                    <h4 style="margin:0">
+                                        {!! DNS2D::getBarcodeHTML($product->code, 'QRCODE',3,3) !!}
+                                    </h4>
+                                </div>
+                            </div>
+                            <div class="col-md-6" style="margin-bottom:15px">
+                                <div class="form-group">
+                                    <label for="first_name" style="color:#337ab7"><b>{{ trans('backend.barcode') }}</b></label>
+                                    <h4 style="margin:0">
+                                        {!! DNS1D::getBarcodeHTML($product->code, 'C39',1,30) !!}
+                                    </h4>
+                                </div>
+                            </div>
                         </div>
 
                         <hr>
@@ -177,7 +193,7 @@
                         <div class="row">
                             <div class="col-md-12" style="margin-bottom:15px">
                                 <div class="form-group">
-                                    <label for="name" style="color:#337ab7"><b>{{ trans('backend.name') }}</b></label>
+                                    <label for="name" style="color:#337ab7"><b>{{ trans('backend.description') }}</b></label>
                                     <h4 style="margin:0">
                                         @if( app()->getLocale() == 'ar' )
                                             {!!  $product->description_ar !!}

@@ -11,6 +11,7 @@ use App\Models\Supplier;
 use App\Models\Customer;
 use App\Models\ProductCategory;
 use App\Models\Product;
+use App\Models\Purchase;
 use App\Mail\AdminResetPassword;
 use DB;
 use Carbon\Carbon;
@@ -27,6 +28,7 @@ class AdminAuthController extends Controller
         $customers = Customer::count();
         $product_categories = ProductCategory::count();
         $products = Product::count();
+        $purchases = Purchase::count();
 
         return view('Admin.index' , compact(
             'admins',
@@ -36,6 +38,7 @@ class AdminAuthController extends Controller
             'customers',
             'product_categories',
             'products',
+            'purchases',
         ));
     }
 
